@@ -5,7 +5,8 @@
 using namespace std;
 
 Node::Node(Student* studenttmp) : student(studenttmp) {
-  nextNode = nullptr; //passing through values from Node.h
+  student = studenttmp;
+  nextNode = NULL; //passing through values from Node.h
 }
 
 Node::~Node() {}
