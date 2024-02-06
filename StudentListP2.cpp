@@ -197,44 +197,14 @@ void rehasher(Node* ary[], int size) {
   for(int i =0; i < size; i++) {
     if(ary[i] != NULL) {
       Node* current = ary[i];
-      Node* first = current;
       while(current != NULL) {
-	int nameLen = 0;
-	int place = 0;
-	char* firstname;
-	firstname = new char[80];
-        for(int i =0; i < strlen(current ->getStudent() -> getFirstName()); i++) {
-	  nameLen += firstname[i];
-	}
-	place = nameLen % size;
-
-	if(temp[place] == NULL) {
-	  temp[place] = current;
-	}
-	else if(temp[place] != NULL) {
-	  Node* currentTemp = temp[place];
-	  cout << "fffffffffffffdddddddddddatgerfesfgrfgdergasdwgefrv" << endl;
-
-	  while(currentTemp -> getNext() != NULL) {
-	    cout << "1" << endl;
-	    currentTemp -> getStudent() -> printStudent();
-	    currentTemp = currentTemp -> getNext();
-	  }
-	  cout << "f555555555555555555555ffff" << endl;
-
-	  currentTemp -> setNext(current);
-	}
-	cout << "fffff0000000000000000000000000000" << endl;
-
-	current = current -> getNext();
-	while(first -> getNext() != NULL) {
-	  Node* temp = first;
-	  first = first -> getNext();
-	  temp ->setNext(NULL);
-	}
+	cout << "eeee" << endl;
+	hasher(current -> getStudent(), temp, newSize);
+	current ->getNext();
       }
     }
   }
+	
   ary = temp;
 
 }
