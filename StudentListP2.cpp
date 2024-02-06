@@ -35,8 +35,9 @@ int main () {
   ifstream fin("Aaren.txt");
   char* temp;
   temp = new char[100];
-  while(fin >> temp) {
+  while(fin >> temp) {    
     firstNameV.push_back(temp);
+    temp = new char[100];
   }
   fin.close();
 
@@ -44,18 +45,13 @@ int main () {
   char* temp1;
   temp1 = new char[100];
   while(fin1 >> temp1) {
-    cout << temp1 << endl;
     lastNameV.push_back(temp1);
+    temp1 = new char[100];
   }
   fin1.close();
 
-  for (int i = 0; i < lastNameV.size(); i++) {
-        cout << lastNameV[i];
-    }
-
-  
   while(stillActive == true) {
-    cout << "Please enter add print average delete or quit: " << endl;
+    cout << "Please enter add print average generate delete or quit: " << endl;
     char input[20];
     cin >> input;
     if (strcmp(input, "add") == 0) {//When a user enters add this condition will call the add method  
@@ -135,6 +131,7 @@ void hasher(Student* stu, Node* ary[],int size) {
       rehasher(ary, size);
       hasher(stu, ary,size);
     }
+    cout << counter << endl;
 }
 }
 
@@ -220,6 +217,7 @@ void rehasher(Node* ary[], int size) {
 
 	  while(currentTemp -> getNext() != NULL) {
 	    cout << "1" << endl;
+	    currentTemp -> getStudent() -> printStudent();
 	    currentTemp = currentTemp -> getNext();
 	  }
 	  cout << "f555555555555555555555ffff" << endl;
@@ -254,6 +252,7 @@ void randStu(int id, int size, Node* ary[], vector<char*> firstNameV,vector<char
   char* lastName;
   lastName = new char[80];
     float GPA = rand() % 5;
+    GPA = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/4.00));
     int first = rand() % 4946;
     int last = rand() % 150;
     firstName = firstNameV[first];
