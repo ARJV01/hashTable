@@ -1,6 +1,6 @@
 //Arjun Vinsel
-//12/19/2023
-//
+//2/7/2023
+//This program uses a hash table to store students. This progam uses linked lists to avoid collision and when the list gets to 4 it will reshash
 #include<string>
 #include<iostream>
 #include<cstring>
@@ -14,13 +14,13 @@
 using namespace std;
 
 
-void add(Node* ary[], int size);
-void print(Node* ary[], int size);
-void deleteStudent(Node* ary[], int size);
-void hasher(Student* stu, Node* ary[], int size);
-void arrayNuller(Node* ary[], int size);
-void rehasher(Node* ary[], int size);
-void randStu(int id, int size, Node* ary[], vector<char*> firstNameV,vector<char*> lastNameV);
+void add(Node* ary[], int size);//Creates the student
+void print(Node* ary[], int size);//prints all student in the table
+void deleteStudent(Node* ary[], int size);//deletes a student from the table
+void hasher(Student* stu, Node* ary[], int size);//hashes the students into the tables
+void arrayNuller(Node* ary[], int size);//Makes all elements in an array null
+void rehasher(Node* ary[], int size);//will rehash the table if the table is too large
+void randStu(int id, int size, Node* ary[], vector<char*> firstNameV,vector<char*> lastNameV);//creates random students
 
 int main () {
 
@@ -68,7 +68,7 @@ int main () {
     if (strcmp(input, "quit") == 0) {// When a user enters quit the loop will set still active to false and quit the program
     stillActive = false;
   }
-    if (strcmp(input, "generate") == 0) {
+    if (strcmp(input, "generate") == 0) {//Will cal ther generate funtion when the user enters generate
       randStu(id, size, ary,firstNameV,lastNameV);
     }
   }
@@ -82,7 +82,7 @@ void arrayNuller(Node* ary[], int size) {
   }
 }
 
-void add(Node* ary[],int size) {// This method will have a user enter in the fist name, last name, ID, and Gpa of a student, then it will add the student to the vector 
+void add(Node* ary[],int size) {// This method will have a user enter in the fist name, last name, ID, and Gpa of a student, then it will call the hasher funtion 
   char* firstName;
   firstName = new char[80];
   char* lastName;
@@ -101,7 +101,7 @@ void add(Node* ary[],int size) {// This method will have a user enter in the fis
   hasher(stu, ary, size);
 }
 
-void hasher(Student* stu, Node* ary[],int size) {
+void hasher(Student* stu, Node* ary[],int size) {//this funtion will has students into the table
   char* firstname;
   firstname = new char[80];
   int nameLen = 0;
@@ -128,18 +128,18 @@ void hasher(Student* stu, Node* ary[],int size) {
     current -> setNext(temp);
   }
     else if (counter == 4) {
+      Node* temp = new Node(stu);
+      current -> setNext(temp);
       rehasher(ary, size);
-      hasher(stu, ary,size);
     }
-    cout << counter << endl;
+    }
 }
-}
 
 
 
 
 
-void print(Node* ary[],int size) {// This method will print all the students in the vector
+void print(Node* ary[],int size) {// This method will print all the students in the table
   for(int i =0; i < size; i++) {
     if(ary[i] != NULL) {
       Node* current = ary[i];
@@ -152,7 +152,7 @@ void print(Node* ary[],int size) {// This method will print all the students in 
   }
 
 
-void deleteStudent (Node* ary[], int size) {
+void deleteStudent (Node* ary[], int size) {//This method will serach for a student and delete them
   cout << "enter the id of the student you wish to delete" << endl;
   int id = 0;
   cin >> id;
@@ -171,7 +171,6 @@ void deleteStudent (Node* ary[], int size) {
 	current = NULL;
       }
       else if(current == first && current -> getStudent() -> getId() == id) {//first
-	cout << "d" << endl;
 	ary[i] = NULL;
 	if(current -> getNext() != NULL) {
 	  ary[i] = current -> getNext();
@@ -189,7 +188,7 @@ void deleteStudent (Node* ary[], int size) {
 
 }
 
-void rehasher(Node* ary[], int size) {
+void rehasher(Node* ary[], int size) {//this funtion will rehash the table
   int newSize = 0;
   newSize = size*2;
   Node* temp[newSize];
@@ -197,10 +196,9 @@ void rehasher(Node* ary[], int size) {
   for(int i =0; i < size; i++) {
     if(ary[i] != NULL) {
       Node* current = ary[i];
-      while(current != NULL) {
-	cout << "eeee" << endl;
+      while(current -> getNext() != NULL) {
 	hasher(current -> getStudent(), temp, newSize);
-	current ->getNext();
+	current = current -> getNext();
       }
     }
   }
@@ -209,7 +207,7 @@ void rehasher(Node* ary[], int size) {
 
 }
 
-void randStu(int id, int size, Node* ary[], vector<char*> firstNameV,vector<char*> lastNameV) {
+void randStu(int id, int size, Node* ary[], vector<char*> firstNameV,vector<char*> lastNameV) {//this funtion will create random students
   int input;
   int counter = 0;
   srand((unsigned) time(NULL));
@@ -223,8 +221,8 @@ void randStu(int id, int size, Node* ary[], vector<char*> firstNameV,vector<char
   lastName = new char[80];
     float GPA = rand() % 5;
     GPA = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/4.00));
-    int first = rand() % 4946;
-    int last = rand() % 150;
+    int first = rand() % 4945;
+    int last = rand() % 149;
     firstName = firstNameV[first];
     lastName = lastNameV[last];
     Student *stu = new Student(firstName, lastName, id, GPA);
