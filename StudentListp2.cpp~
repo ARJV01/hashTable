@@ -1,7 +1,6 @@
 //Arjun Vinsel
 //2/7/2023
 //This program uses a hash table to store students. This progam uses linked lists to avoid collision and when the list gets to 4 it will reshash
-#include<string>
 #include<iostream>
 #include<cstring>
 #include"Node.h"
