@@ -1,6 +1,7 @@
 //Arjun Vinsel
 //2/7/2023
 //This program uses a hash table to store students. This progam uses linked lists to avoid collision and when the list gets to 4 it will reshash
+#include<string>
 #include<iostream>
 #include<cstring>
 #include"Node.h"
@@ -220,8 +221,8 @@ void randStu(int id, int size, Node* ary[], vector<char*> firstNameV,vector<char
   lastName = new char[80];
     float GPA = rand() % 5;
     GPA = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/4.00));
-    int first = rand() % 4945;
-    int last = rand() % 149;
+    int first = rand() % 23;
+    int last = rand() % 23;
     firstName = firstNameV[first];
     lastName = lastNameV[last];
     Student *stu = new Student(firstName, lastName, id, GPA);

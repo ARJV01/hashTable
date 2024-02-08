@@ -221,8 +221,8 @@ void randStu(int id, int size, Node* ary[], vector<char*> firstNameV,vector<char
   lastName = new char[80];
     float GPA = rand() % 5;
     GPA = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/4.00));
-    int first = rand() % 4945;
-    int last = rand() % 149;
+    int first = rand() % 20;
+    int last = rand() % 20;
     firstName = firstNameV[first];
     lastName = lastNameV[last];
     Student *stu = new Student(firstName, lastName, id, GPA);
